@@ -10,9 +10,14 @@ h1 {
   text-align: center;
 }
 
-div.info {
+div#info {
   background: black;
   border: 1px solid #444;
   margin-top: 1rem;
   min-height: 3rem;
+  padding: 1rem;
+}
+
+div#info td {
+  min-width: 9rem;
 }
