@@ -1,4 +1,6 @@
 const electron = require('electron');
+const positioner = require('electron-traywindow-positioner');
+
 const path = require('path');
 
 const { app, BrowserWindow, Tray, Menu } = electron;
@@ -27,10 +29,30 @@ app.on('ready', () => {
       label: 'Show / Hide',
       click() {
         if (mainWindow.isVisible()) mainWindow.hide();
-        else mainWindow.show();
+        else {
+          positioner.position(mainWindow, tray.getBounds());
+          mainWindow.show();
+        }
+      }
+    },
+    {
+      label: 'Quit',
+      accelerator: 'CmdOrCtrl+Q',
+      click() {
+        app.quit();
       }
     }
   ]);
 
   tray.setContextMenu(contextMenu);
+
+  // Other option on Linux
+  // tray.on('click', (event, bounds) => {
+
+  //   if (mainWindow.isVisible()) mainWindow.hide();
+  //   else {
+  //     positioner.position(mainWindow, tray.getBounds());
+  //     mainWindow.show();
+  //   }
+  // });
 });

@@ -11,11 +11,21 @@ Working on third app - Tray Timer
 I have split out javascript files from the HTML files. I have also added some minimal
 CSS to each app.
 
-In the Tray App, I have updated some of the modules to the latest, including Electron.
+### Tray App
+
+I have updated some of the modules to the latest versions, including Electron.
 I haven't so far updated React or Webpack, but I have had to adjust the Webpack / Babel 
-configs. Also, I am running on Linux, so I have attached an explicit  Context Menu to 
-the icon because responding to click only sort of works. By default you get a content 
-menu that gives the application name.
+configs. 
+
+Also, I am running on Linux, so there are two problems:
+
+* I have attached an explicit Context Menu to the icon because just responding to 
+click only sort of works. By default, you get a content menu that gives the application 
+name.
+
+* I have used the module electron-traywindow-positioner to position the main window
+because bounds is not passed to a menu click, and calling tray.getBounds() returns 0
+for both x and y, and also width and height. 
 
 ## Git client
 

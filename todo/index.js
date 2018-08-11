@@ -56,7 +56,6 @@ let menuTemplate = [
           clearTasks();
         }
       },
-
       {
         label: 'Quit',
         accelerator: 'CmdOrCtrl+Q',
