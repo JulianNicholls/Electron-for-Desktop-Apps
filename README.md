@@ -4,12 +4,18 @@ This is the code from [Electron for Desktop Apps at Udemy](https://www.udemy.com
 
 ## Progress
 
-Just started
+Working on third app - Tray Timer
 
 ## Differences from Stephen
 
 I have split out javascript files from the HTML files. I have also added some minimal
 CSS to each app.
+
+In the Tray App, I have updated some of the modules to the latest, including Electron.
+I haven't so far updated React or Webpack, but I have had to adjust the Webpack / Babel 
+configs. Also, I am running on Linux, so I have attached an explicit  Context Menu to 
+the icon because responding to click only sort of works. By default you get a content 
+menu that gives the application name.
 
 ## Git client
 
