@@ -16,10 +16,6 @@ app.on('ready', () => {
   Menu.setApplicationMenu(mainMenu);
 });
 
-ipcMain.on('task:submit', (event, task) => {
-  mainWindow.webContents.send('task:new', task);
-});
-
 function createAddWindow() {
   addWindow = new BrowserWindow({
     width: 300,
@@ -28,7 +24,19 @@ function createAddWindow() {
   });
 
   addWindow.loadURL(`file://${__dirname}/add.html`);
+
+  addWindow.on('closed', () => (addWindow = null));
 }
+
+function clearTasks() {
+  mainWindow.webContents.send('tasks:clear');
+}
+
+ipcMain.on('task:submit', (event, task) => {
+  mainWindow.webContents.send('task:new', task);
+
+  addWindow.close();
+});
 
 let menuTemplate = [
   {
@@ -41,6 +49,14 @@ let menuTemplate = [
           createAddWindow();
         }
       },
+      {
+        label: 'Clear Tasks',
+        accelerator: 'CmdOrCtrl+D',
+        click() {
+          clearTasks();
+        }
+      },
+
       {
         label: 'Quit',
         accelerator: 'CmdOrCtrl+Q',

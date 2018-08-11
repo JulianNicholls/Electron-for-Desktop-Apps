@@ -8,7 +8,8 @@ Just started
 
 ## Differences from Stephen
 
-...
+I have split out javascript files from the HTML files. I have also added some minimal
+CSS to each app.
 
 ## Git client
 
