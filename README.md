@@ -20,11 +20,11 @@ configs.
 Also, I am running on Linux, so there are two problems:
 
 * I have attached an explicit Context Menu to the icon because just responding to 
-click only sort of works. By default, you get a content menu that gives the application 
+click only sort of works. By default, you get a context menu that gives the application 
 name.
 
-* I have used the module electron-traywindow-positioner to position the main window
-because bounds is not passed to a menu click, and calling tray.getBounds() returns 0
+* I have used the module `electron-traywindow-positioner` to position the main window
+because `bounds` is not passed to a menu click, and calling `tray.getBounds()` returns 0
 for both x and y, and also width and height. 
 
 ## Git client
