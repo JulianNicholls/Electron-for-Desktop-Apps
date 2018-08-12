@@ -15,7 +15,7 @@ app.on('ready', () => {
 
   tray = new TimerTray(iconPath, mainWindow);
 
-  if (process.platform === 'darwin') app.dock.hide();
+  //  app.dock.hide();  // Not on Linux
 });
 
 // This doesn't do anything on Linux (or Windows, probably)
