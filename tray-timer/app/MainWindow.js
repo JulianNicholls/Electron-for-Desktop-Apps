@@ -7,10 +7,18 @@ class MainWindow extends BrowserWindow {
       height: 500,
       frame: false,
       resizable: false,
-      show: false
+      show: false,
+
+      // Ensure that we don't get throttled in the background,
+      // otherwise the timers won't run.
+      webPreferences: { backgroundThrottling: false }
     });
 
     this.loadURL(url);
+
+    this.on('blur', () => {
+      this.hide();
+    });
   }
 }
 

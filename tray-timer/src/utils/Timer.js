@@ -1,5 +1,5 @@
-import moment from "moment";
-import "moment-duration-format";
+import moment from 'moment';
+import 'moment-duration-format';
 
 class Timer {
   constructor(config) {
@@ -67,15 +67,15 @@ class Timer {
   }
 
   getTimeDisplay() {
-    return moment.duration(this.duration).format("hh:mm:ss", { trim: false });
+    return moment.duration(this.duration).format('hh:mm:ss', { trim: false });
   }
 
   validateConfigObject(config) {
     const { unit, onDisplayChange, onTimerExpiration } = config;
 
-    const duration = parseInt(config.duration);
-    if (typeof duration !== "number") {
-      throw new TypeError("Timer class requires duration = Number");
+    const duration = parseInt(config.duration, 10);
+    if (typeof duration !== 'number') {
+      throw new TypeError('Timer class requires duration = Number');
     }
 
     const validUnits = {
@@ -86,16 +86,16 @@ class Timer {
 
     if (!validUnits[unit]) {
       throw new TypeError(
-        "Timer class requires valid unit of time (seconds, minutes, or hours)"
+        'Timer class requires valid unit of time (seconds, minutes, or hours)'
       );
     }
 
     if (
-      typeof onDisplayChange !== "function" ||
-      typeof onTimerExpiration !== "function"
+      typeof onDisplayChange !== 'function' ||
+      typeof onTimerExpiration !== 'function'
     ) {
       throw new TypeError(
-        "Timer class requires 2 callback functions: onDisplayChange and onTimerExpiration"
+        'Timer class requires 2 callback functions: onDisplayChange and onTimerExpiration'
       );
     }
 
