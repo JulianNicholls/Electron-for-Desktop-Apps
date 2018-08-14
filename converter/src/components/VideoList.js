@@ -2,20 +2,18 @@ import _ from 'lodash';
 import moment from 'moment';
 import 'moment-duration-format';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
+// import { connect } from 'react-redux';
 
 const VIDEO_FORMATS = [
-  {value: 'avi', option: 'AVI'},
-  {value: 'm4v', option: 'M4V raw MPEG-4'},
-  {value: 'mov', option: 'MOV / QuickTime'},
-  {value: 'mp4', option: 'MP4 / QuickTime'},
-  {value: 'mpeg', option: 'MPEG'},
-  {value: 'ogv', option: 'OGV'},
-]
+  { value: 'avi', option: 'AVI' },
+  { value: 'm4v', option: 'M4V raw MPEG-4' },
+  { value: 'mov', option: 'MOV / QuickTime' },
+  { value: 'mp4', option: 'MP4 / QuickTime' },
+  { value: 'mpeg', option: 'MPEG' },
+  { value: 'ogv', option: 'OGV' }
+];
 
 class VideoList extends Component {
-
   showStatus({ complete, timemark, outputPath, err }) {
     if (complete) {
       return (
@@ -24,41 +22,66 @@ class VideoList extends Component {
         </button>
       );
     } else if (err) {
-      return <p className="red-text">{err}</p>
+      return <p className="red-text">{err}</p>;
     }
     return '';
   }
 
-  renderProgressBar = ({duration, timemark, complete}) => {
+  renderProgressBar = ({ duration, timemark, complete }) => {
     if (timemark) {
-      return `${100 - (moment.duration(timemark).asMilliseconds() / (duration * 10))}%`;
+      return `${100 -
+        moment.duration(timemark).asMilliseconds() / (duration * 10)}%`;
     } else if (complete) {
-      return '0%'
+      return '0%';
     } else {
-      return '100%'
+      return '100%';
     }
-  }
+  };
 
   renderVideos() {
     return _.map(this.props.videos, video => {
-      const { name, path, duration, format, timemark, complete, outputPath, err } = video;
-      const formatedDuration = moment.duration(duration, 's').format("hh:mm:ss", {trim:false})
+      const {
+        name,
+        path,
+        duration,
+        format,
+        fileFormat,
+        size,
+        timemark,
+        complete,
+        outputPath,
+        err
+      } = video;
+      const formattedDuration = moment.duration(duration, 's').format('hh:mm:ss');
       return (
         <li className="collection-item avatar" key={path}>
-          <div style={{...styles.progressBar, right: this.renderProgressBar(video)}} />
-          <i className="material-icons circle btn-floating" onClick={() => this.props.removeVideo(video)}>clear</i>
+          <div
+            style={{ ...styles.progressBar, right: this.renderProgressBar(video) }}
+          />
+          <i
+            className="material-icons circle btn-floating"
+            onClick={() => this.props.removeVideo(video)}
+          >
+            clear
+          </i>
           <div style={styles.fileName}>
-            <p>{name}</p>
-            <p>{formatedDuration}</p>
+            <p>
+              {name} - {fileFormat}
+            </p>
+            <p>
+              Size: {humanSize(size)}, Duration: {formattedDuration}
+            </p>
           </div>
           <div className="secondary-content" style={styles.secondaryContent}>
             <select
-              className={complete || timemark ? "hidden" : "browser-default right"}
+              className={complete || timemark ? 'hidden' : 'browser-default right'}
               value={format}
               onChange={e => this.props.onFormatChange(video, e.target.value)}
             >
               {VIDEO_FORMATS.map(outFormat => (
-                <option key={outFormat.value} value={outFormat.value}>{outFormat.option}</option>
+                <option key={outFormat.value} value={outFormat.value}>
+                  {outFormat.option}
+                </option>
               ))}
             </select>
             {this.showStatus({ complete, timemark, outputPath, err })}
@@ -69,11 +92,7 @@ class VideoList extends Component {
   }
 
   render() {
-    return (
-      <ul className="collection video-list">
-        {this.renderVideos()}
-      </ul>
-    );
+    return <ul className="collection video-list">{this.renderVideos()}</ul>;
   }
 }
 
@@ -98,6 +117,12 @@ const styles = {
   fileName: {
     width: '65%'
   }
-}
+};
+
+const humanSize = size => {
+  if (size > 1400000) return `${(size / 1048576).toFixed(1)}MB`;
+
+  return `${(size / 1024).toFixed(2)}KB`;
+};
 
 export default VideoList;

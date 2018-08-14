@@ -1,24 +1,36 @@
-const { app, ipcMain } = require('electron');
-const path = require('path');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const { ffprobe } = require('fluent-ffmpeg');
 
-const MainWindow = require('./app/MainWindow');
-const TimerTray = require('./app/TimerTray');
-
-let tray;
+let mainWindow;
 
 app.on('ready', () => {
-  const mainWindow = new MainWindow(`file://${__dirname}/src/index.html`);
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: { backgroundThrottling: false }
+  });
 
-  const iconName =
-    process.platform === 'win32' ? 'windows-icon.png;' : 'iconWhite.png';
-  const iconPath = path.join(__dirname, 'src', 'assets', iconName);
-
-  tray = new TimerTray(iconPath, mainWindow);
-
-  //  app.dock.hide();  // Not on Linux
+  mainWindow.loadURL(`file://${__dirname}/src/index.html`);
 });
 
-// This doesn't do anything on Linux (or Windows, probably)
-ipcMain.on('timer:update', (event, text) => {
-  tray.setTitle(text);
+ipcMain.on('videos:add', (event, videos) => {
+  const videoPromises = videos.map(
+    video =>
+      new Promise((resolve, reject) => {
+        ffprobe(video.path, (err, videoData) => {
+          if (err) reject(err);
+
+          const {
+            format: { format_long_name: fileFormat, duration }
+          } = videoData;
+
+          video = { ...video, duration, fileFormat, format: 'avi' };
+          resolve(video);
+        });
+      })
+  );
+
+  Promise.all(videoPromises).then(results =>
+    mainWindow.webContents.send('videos:info', results)
+  );
 });
