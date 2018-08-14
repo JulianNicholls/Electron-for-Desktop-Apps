@@ -1,5 +1,5 @@
 const electron = require('electron');
-const ffmpeg = require('fluent-ffmpeg');
+const { ffprobe } = require('fluent-ffmpeg');
 
 const { app, BrowserWindow, ipcMain } = electron;
 
@@ -14,15 +14,15 @@ app.on('ready', () => {
 });
 
 ipcMain.on('video:submit', (event, path) => {
-  ffmpeg.ffprobe(path, (err, videoData) => {
+  ffprobe(path, (err, videoData) => {
     if (err) return console.error(err);
 
     const {
-      format: { format_long_name, duration, size, bit_rate }
+      format: { format_long_name: format, duration, size, bit_rate }
     } = videoData;
 
     mainWindow.webContents.send('video:info', {
-      format_long_name,
+      format,
       duration,
       size,
       bit_rate

@@ -14,7 +14,7 @@ form.addEventListener('submit', event => {
 
 ipcRenderer.on('video:info', (event, videoInfo) => {
   infoDiv.innerHTML = `<table><tbody>
-  <tr><td>Format</td><td>${videoInfo.format_long_name}</td></tr>
+  <tr><td>Format</td><td>${videoInfo.format}</td></tr>
   <tr><td>Duration</td><td>${humanDuration(videoInfo.duration)}</td></tr>
   <tr><td>Size</td><td>${humanSize(videoInfo.size)}</td></tr>
   <tr><td>Bit Rate</td><td>${humanSize(videoInfo.bit_rate)}/s</td></tr>
