@@ -4,12 +4,15 @@ This is the code from [Electron for Desktop Apps at Udemy](https://www.udemy.com
 
 ## Progress
 
-Working on third app - Tray Timer
+Working on fourth app - Video Converter
 
 ## Differences from Stephen
 
-I have split out javascript files from the HTML files. I have also added some minimal
-CSS to each app.
+I have split out javascript files from the HTML files in the first couple of apps. 
+I have also added some minimal CSS to each app.
+
+In the video info and converter apps, I have added more information about the video 
+than just the duration.
 
 ### Tray App
 
