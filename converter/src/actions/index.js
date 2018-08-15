@@ -42,7 +42,9 @@ export const convertVideos = () => (dispatch, getState) => {
 
 // TODO: Open the folder that the newly created video
 // exists in
-export const showInFolder = outputPath => dispatch => {};
+export const showInFolder = outputPath => dispatch => {
+  ipc.send('video:open', outputPath);
+};
 
 export const addVideo = video => {
   return {

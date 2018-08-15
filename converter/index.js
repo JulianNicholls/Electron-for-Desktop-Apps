@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 
@@ -44,17 +44,19 @@ ipcMain.on('videos:convert', (_, videos) => {
     const { dir, name } = path.parse(video.path);
     const outputPath = `${dir}/${name}.${video.format}`;
 
-    console.log('Processing', outputPath);
     ffmpeg(video.path)
       .output(outputPath)
       .on('progress', ({ timemark }) => {
-        console.log(timemark);
         mainWindow.webContents.send('videos:convert:progress', { video, timemark });
       })
       .on('end', () => {
-        console.log('Conversion complete');
         mainWindow.webContents.send('videos:convert:end', { video, outputPath });
       })
       .run();
   });
+});
+
+// Open the folder that the outputPath points to
+ipcMain.on('video:open', (_, outputPath) => {
+  shell.showItemInFolder(outputPath);
 });

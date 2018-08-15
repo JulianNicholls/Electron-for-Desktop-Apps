@@ -2,10 +2,6 @@
 
 This is the code from [Electron for Desktop Apps at Udemy](https://www.udemy.com/electron-react-tutorial/learn/v4/content)
 
-## Progress
-
-Working on fourth app - Video Converter
-
 ## Differences from Stephen
 
 I have split out javascript files from the HTML files in the first couple of apps. 
@@ -17,18 +13,18 @@ than just the duration.
 ### Tray App
 
 I have updated some of the modules to the latest versions, including Electron.
-I haven't so far updated React or Webpack, but I have had to adjust the Webpack / Babel 
+I haven't updated React or Webpack, but I have had to adjust the Webpack / Babel 
 configs. 
 
 Also, I am running on Linux, so there are two problems:
 
-* I have attached an explicit Context Menu to the icon because just responding to 
-click only sort of works. By default, you get a context menu that gives the application 
-name.
+* I have been forced to attach an explicit Context Menu to the icon because 
+just responding to click only sort of works. By default, you get a context 
+menu that gives the application name.
 
-* I have used the module `electron-traywindow-positioner` to position the main window
-because `bounds` is not passed to a menu click, and calling `tray.getBounds()` returns 0
-for both x and y, and also width and height. 
+* I have used the module `electron-traywindow-positioner` to position the main 
+window because `bounds` is not passed to a menu click, and calling 
+`tray.getBounds()` returns 0 for both x and y, and also width and height. 
 
 ## Git client
 
