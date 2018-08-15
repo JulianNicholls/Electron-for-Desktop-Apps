@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-const { ffprobe } = require('fluent-ffmpeg');
+const ffmpeg = require('fluent-ffmpeg');
+const path = require('path');
 
 let mainWindow;
 
@@ -13,11 +14,13 @@ app.on('ready', () => {
   mainWindow.loadURL(`file://${__dirname}/src/index.html`);
 });
 
-ipcMain.on('videos:add', (event, videos) => {
+// Return the duration, size, and file format of the added videos
+
+ipcMain.on('videos:add', (_, videos) => {
   const videoPromises = videos.map(
     video =>
       new Promise((resolve, reject) => {
-        ffprobe(video.path, (err, videoData) => {
+        ffmpeg.ffprobe(video.path, (err, videoData) => {
           if (err) reject(err);
 
           const {
@@ -33,4 +36,25 @@ ipcMain.on('videos:add', (event, videos) => {
   Promise.all(videoPromises).then(results =>
     mainWindow.webContents.send('videos:info', results)
   );
+});
+
+// Convert the videos, returning progress and completion
+ipcMain.on('videos:convert', (_, videos) => {
+  videos.forEach(video => {
+    const { dir, name } = path.parse(video.path);
+    const outputPath = `${dir}/${name}.${video.format}`;
+
+    console.log('Processing', outputPath);
+    ffmpeg(video.path)
+      .output(outputPath)
+      .on('progress', ({ timemark }) => {
+        console.log(timemark);
+        mainWindow.webContents.send('videos:convert:progress', { video, timemark });
+      })
+      .on('end', () => {
+        console.log('Conversion complete');
+        mainWindow.webContents.send('videos:convert:end', { video, outputPath });
+      })
+      .run();
+  });
 });

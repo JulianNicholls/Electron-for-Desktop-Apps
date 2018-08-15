@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import {
   ADD_VIDEO,
   ADD_VIDEOS,
@@ -15,11 +16,18 @@ export default (state = INITIAL_STATE, action) => {
     case VIDEO_COMPLETE:
       return {
         ...state,
-        [action.payload.path]: { ...action.payload, complete: true }
+        [action.video.path]: {
+          ...action.video,
+          outputPath: action.outputPath,
+          complete: true
+        }
       };
 
     case VIDEO_PROGRESS:
-      return { ...state, [action.payload.path]: action.payload };
+      return {
+        ...state,
+        [action.video.path]: { ...action.video, timemark: action.timemark }
+      };
 
     case ADD_VIDEOS:
       return { ...state, ..._.mapKeys(action.videos, 'path') };

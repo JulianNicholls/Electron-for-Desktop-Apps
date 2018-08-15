@@ -1,5 +1,7 @@
 import { ipcRenderer as ipc } from 'electron';
 
+import videoArray from '../selectors';
+
 import {
   ADD_VIDEO,
   ADD_VIDEOS,
@@ -9,20 +11,34 @@ import {
   VIDEO_COMPLETE
 } from './types';
 
-// TODO: Communicate to MainWindow process that videos
+// Communicate to MainWindow process that videos
 // have been added and are pending conversion
 export const addVideos = videos => dispatch => {
   ipc.send('videos:add', videos);
+
   ipc.on('videos:info', (_, videosWithData) =>
     dispatch({ type: ADD_VIDEOS, videos: videosWithData })
   );
 };
 
-// TODO: Communicate to MainWindow that the user wants
+// Communicate to MainWindow that the user wants
 // to start converting videos.  Also listen for feedback
 // from the MainWindow regarding the current state of
 // conversion.
-export const convertVideos = () => (dispatch, getState) => {};
+export const convertVideos = () => (dispatch, getState) => {
+  ipc.send(
+    'videos:convert',
+    videoArray(getState().videos).filter(video => !video.complete)
+  );
+
+  ipc.on('videos:convert:progress', (_, { video, timemark }) => {
+    dispatch({ type: VIDEO_PROGRESS, video, timemark });
+  });
+
+  ipc.on('videos:convert:end', (_, { video, outputPath }) => {
+    dispatch({ type: VIDEO_COMPLETE, video, outputPath });
+  });
+};
 
 // TODO: Open the folder that the newly created video
 // exists in

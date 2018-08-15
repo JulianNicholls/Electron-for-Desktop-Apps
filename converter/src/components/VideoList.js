@@ -1,8 +1,8 @@
-import _ from 'lodash';
 import moment from 'moment';
 import 'moment-duration-format';
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+
+import videoArray from '../selectors';
 
 const VIDEO_FORMATS = [
   { value: 'avi', option: 'AVI' },
@@ -14,7 +14,7 @@ const VIDEO_FORMATS = [
 ];
 
 class VideoList extends Component {
-  showStatus({ complete, timemark, outputPath, err }) {
+  showStatus({ complete, outputPath, err }) {
     if (complete) {
       return (
         <button onClick={() => this.props.onFolderOpen(outputPath)} className="btn">
@@ -39,7 +39,7 @@ class VideoList extends Component {
   };
 
   renderVideos() {
-    return _.map(this.props.videos, video => {
+    return videoArray(this.props.videos).map(video => {
       const {
         name,
         path,
@@ -53,6 +53,7 @@ class VideoList extends Component {
         err
       } = video;
       const formattedDuration = moment.duration(duration, 's').format('hh:mm:ss');
+
       return (
         <li className="collection-item avatar" key={path}>
           <div
