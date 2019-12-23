@@ -19,16 +19,16 @@
   "license": "ISC",
   "homepage": "https://github.com/JulianNicholls/Electron-for-Desktop-Apps.git",
   "dependencies": {
-    "electron": "^2.0.7",
+    "electron": "^2.0.18",
     "fluent-ffmpeg": "^2.1.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
-    "eslint": "^5.1.0",
+    "eslint": "^5.16.0",
     "eslint-config-react-app": "^2.1.0",
-    "eslint-plugin-flowtype": "^2.50.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0"
+    "eslint-plugin-flowtype": "^2.50.3",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0"
   }
 }
