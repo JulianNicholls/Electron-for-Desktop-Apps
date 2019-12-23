@@ -18,14 +18,22 @@ ipcMain.on('video:submit', (event, path) => {
     if (err) return console.error(err);
 
     const {
-      format: { format_long_name: format, duration, size, bit_rate }
+      format: { format_long_name: format, duration, size, bit_rate },
+      streams,
     } = videoData;
 
+    const [video, audio] = streams;
+
+    console.log({ video });
+
+    const resolution = `${video.codec_name} ${video.width}x${video.height}`;
+
     mainWindow.webContents.send('video:info', {
+      resolution,
       format,
       duration,
       size,
-      bit_rate
+      bit_rate,
     });
   });
 });
