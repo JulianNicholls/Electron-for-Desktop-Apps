@@ -18,7 +18,7 @@ ipcRenderer.on('video:info', (event, videoInfo) => {
   <tr><td>Format</td><td>${videoInfo.format}</td></tr>
   <tr><td>Duration</td><td>${humanDuration(videoInfo.duration)}</td></tr>
   <tr><td>Size</td><td>${humanSize(videoInfo.size)}</td></tr>
-  <tr><td>Bit Rate</td><td>${humanSize(videoInfo.bit_rate)}/s</td></tr>
+  <tr><td>Bit Rate</td><td>${humanSize(videoInfo.bit_rate / 8)}/s</td></tr>
   </tbody></table>
   `;
 });
@@ -38,7 +38,7 @@ const humanDuration = length => {
 
   if (hours === '' && mins === 0) return `${secs}s`;
 
-  return `${hours}${mins < 10 ? '0' + mins : mins}: ${
+  return `${hours}${mins < 10 ? '0' + mins : mins}:${
     secs < 10 ? '0' + secs : secs
   }`;
 };
