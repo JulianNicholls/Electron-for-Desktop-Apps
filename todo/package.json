@@ -19,7 +19,7 @@
   "license": "ISC",
   "homepage": "https://github.com/JulianNicholls/Electron-for-Desktop-Apps.git",
   "dependencies": {
-    "electron": "^9.4.0"
+    "electron": "^11.5.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
