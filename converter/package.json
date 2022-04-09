@@ -23,7 +23,7 @@
     "babel-preset-react": "^6.24.1",
     "electron": "^9.4.0",
     "fluent-ffmpeg": "^2.1.2",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "moment-duration-format": "^2.2.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
