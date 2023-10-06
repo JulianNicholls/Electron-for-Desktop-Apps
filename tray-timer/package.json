@@ -21,7 +21,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "electron": "^22.3.24",
+    "electron": "^22.3.25",
     "electron-localshortcut": "^3.1.0",
     "electron-traywindow-positioner": "0.0.2",
     "moment": "^2.29.4",
