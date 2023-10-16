@@ -23,7 +23,7 @@
     "fluent-ffmpeg": "^2.1.2"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^10.1.0",
     "eslint": "^5.16.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-flowtype": "^2.50.3",
