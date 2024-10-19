@@ -3,7 +3,7 @@
 This is the code from [Electron for Desktop Apps at Udemy](https://www.udemy.com/electron-react-tutorial/learn/v4/content).
 
 **NOTE:** I have not updated this for a while, so the `yarn.lock` file specifies version 22.x of Electron, 
-but none of the apps has been tried with that version.
+but none of the apps has been tried with that version. In fact, I would be surprised if it still works.
 
 ## Differences from Stephen
 
