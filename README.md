@@ -2,8 +2,9 @@
 
 This is the code from [Electron for Desktop Apps at Udemy](https://www.udemy.com/electron-react-tutorial/learn/v4/content).
 
-**NOTE:** I have not updated this for a while, so the `yarn.lock` file specifies version 22.x of Electron, 
-but none of the apps has been tried with that version. In fact, I would be surprised if it still works.
+**NOTE:** I have not updated this for a while, so the `yarn.lock` file specifies version 28.x of Electron, 
+but none of the apps has been tried with that version. In fact, I would be amazed if any of the projects still work, 
+but the general idea is sound.
 
 ## Differences from Stephen
 
@@ -28,16 +29,6 @@ menu that gives the application name.
 * I have used the module `electron-traywindow-positioner` to position the main 
 window because `bounds` is not passed to a menu click, and calling 
 `tray.getBounds()` returns 0 for both x and y, and also width and height. 
-
-## Git client
-
-I have used Git at the command-line for 10 years.
-Over that time, I have tried many different graphical shells for Git,
-without finding one that was easier and nicer to use than the command-line
-(in my view).
-
-I have now found that [GitKraken](https://www.gitkraken.com) is an excellent
-Git shell and would advise using it to everyone.
 
 ## Questions
 

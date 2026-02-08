@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Video Info app from Electron for Desktop Apps by Stephen Grider",
   "main": "index.js",
-  "engines": {
-    "node": "8.11.x",
-    "npm": "6.2.x"
-  },
   "scripts": {
     "start": "electron ."
   },
@@ -19,16 +15,16 @@
   "license": "ISC",
   "homepage": "https://github.com/JulianNicholls/Electron-for-Desktop-Apps.git",
   "dependencies": {
-    "electron": "^22.3.25",
-    "fluent-ffmpeg": "^2.1.2"
+    "electron": "^39.2.0",
+    "fluent-ffmpeg": "^2.1.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^5.16.0",
-    "eslint-config-react-app": "^2.1.0",
+    "eslint": "^8",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-flowtype": "^2.50.3",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.17.0"
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5"
   }
 }
