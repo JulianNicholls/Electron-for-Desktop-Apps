@@ -31,7 +31,7 @@
     "react-router": "^7.18.0",
     "react-router-dom": "^7.18.0",
     "webpack": "^5.104.1",
-    "webpack-dev-server": "^5.2.4"
+    "webpack-dev-server": "^5.2.5"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
